@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Image Gallery with Lightbox">
+    <title>ArtVista - Image Gallery</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 20px;
+            background: #6c63ff;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+        }
+
+        .gallery {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 12px;
+        }
+
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ArtVista</h1>
+        <p>Explore beautiful moments through our image gallery</p>
+    </header>
+
+    <main>
+        <section class="gallery">
+
+            <img src="https://picsum.photos/id/1015/800/600" alt="Mountain landscape"
+                 onclick="openLightbox(this.src)">
+
+            <img src="https://picsum.photos/id/1016/800/600" alt="Nature landscape"
+                 onclick="openLightbox(this.src)">
+
+            <img src="https://picsum.photos/id/1025/800/600" alt="Dog"
+                 onclick="openLightbox(this.src)">
+
+            <img src="https://picsum.photos/id/1035/800/600" alt="Forest"
+                 onclick="openLightbox(this.src)">
+
+            <img src="https://picsum.photos/id/1043/800/600" alt="Ocean"
+                 onclick="openLightbox(this.src)">
+
+            <img src="https://picsum.photos/id/1069/800/600" alt="City view"
+                 onclick="openLightbox(this.src)">
+
+        </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightboxImage" src="" alt="Selected image"
+             onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        function openLightbox(imageSrc) {
+            document.getElementById("lightboxImage").src = imageSrc;
+            document.getElementById("lightbox").style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
